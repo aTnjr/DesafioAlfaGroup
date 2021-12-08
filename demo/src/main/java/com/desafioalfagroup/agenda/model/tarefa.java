@@ -2,80 +2,77 @@ package com.desafioalfagroup.agenda.model;
 
 import static javax.persistence.GenerationType.AUTO;
 
+import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Time;
 import java.time.LocalDateTime;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+
 @Entity
 @Table(name="TB_TAREFA")
-public class tarefa {
+public class Tarefa implements Serializable {
 
     @Id
     @GeneratedValue(strategy = AUTO)
     private Long id;
 
-    private String Titulo;
-    private Date EntregaDate;
-    private Time EntregaTime;
-    private String Prioridade;
-    private String Status;
+    private String titulo;
+
+    @Column(name = "entrega_date")
+    private Date entregaDate;
+
+    @Column(name = "entrega_time")
+    private Time entregaTime;
+    private String status;
     private LocalDateTime data;
 
+    public Tarefa(){
+    }
 
-    public String getPrioridade() {
-        return Prioridade;
+    public Time getEntregaTime() {
+        return entregaTime;
     }
     
-    public Time getEntregaTime() {
-        return EntregaTime;
-    }
-
     public void setEntregaTime(Time entregaTime) {
-        this.EntregaTime = entregaTime;
+        this.entregaTime = entregaTime;
     }
-
+    
     public LocalDateTime getData() {
         return data;
     }
 
-    public void setData(LocalDateTime data) {
-        this.data = data;
+    public void setData(){
+        this.data = LocalDateTime.now();
     }
 
     public Date getEntregaDate() {
-        return EntregaDate;
+        return entregaDate;
     }
-
+    
     public void setEntregaDate(Date entregaDate) {
-        this.EntregaDate = entregaDate;
+        this.entregaDate = entregaDate;
     }
-
+    
     public Long getId() {
         return id;
     }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
     
     public String getStatus() {
-        return Status;
+        return status;
     }
     public void setStatus(String status) {
-        this.Status = status;
+        this.status = status;
     }
     public String getTitulo() {
-        return Titulo;
+        return titulo;
     }
     public void setTitulo(String titulo) {
-        this.Titulo = titulo;
-    }
-    public void setPrioridade(String prioridade) {
-        this.Prioridade = prioridade;
+        this.titulo = titulo;
     }
 }
