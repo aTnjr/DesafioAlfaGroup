@@ -1,7 +1,7 @@
-package services;
+package com.desafioalfagroup.taskManager.services;
 
-import com.desafioalfagroup.agenda.model.Tarefa;
-import com.desafioalfagroup.agenda.repository.TarefaRepository;
+import com.desafioalfagroup.taskManager.model.Tarefa;
+import com.desafioalfagroup.taskManager.repository.TarefaRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 

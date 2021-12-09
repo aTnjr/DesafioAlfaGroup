@@ -1,10 +1,10 @@
-package com.desafioalfagroup.agenda.model;
+package com.desafioalfagroup.taskManager.model;
 
 import static javax.persistence.GenerationType.AUTO;
 
 import java.io.Serializable;
-import java.sql.Date;
 import java.sql.Time;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -25,7 +25,7 @@ public class Tarefa implements Serializable {
     private String titulo;
 
     @Column(name = "entrega_date")
-    private Date entregaDate;
+    private LocalDate entregaDate;
 
     @Column(name = "entrega_time")
     private Time entregaTime;
@@ -51,11 +51,11 @@ public class Tarefa implements Serializable {
         this.data = LocalDateTime.now();
     }
 
-    public Date getEntregaDate() {
+    public LocalDate getEntregaDate() {
         return entregaDate;
     }
     
-    public void setEntregaDate(Date entregaDate) {
+    public void setEntregaDate(LocalDate entregaDate) {
         this.entregaDate = entregaDate;
     }
     

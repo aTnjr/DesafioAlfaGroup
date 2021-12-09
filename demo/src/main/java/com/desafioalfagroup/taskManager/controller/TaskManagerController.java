@@ -1,11 +1,9 @@
-package com.desafioalfagroup.agenda.controller;
+package com.desafioalfagroup.taskManager.controller;
 
-import java.sql.Date;
-import java.sql.Time;
 import java.util.List;
 
-import com.desafioalfagroup.agenda.model.Tarefa;
-import com.desafioalfagroup.agenda.repository.TarefaRepository;
+import com.desafioalfagroup.taskManager.model.Tarefa;
+import com.desafioalfagroup.taskManager.repository.TarefaRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,51 +13,46 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-
-
 
 
 @RestController
 @RequestMapping(value = "/api")
-public class AgendaController {
+public class TaskManagerController {
 
-    Date entregaDate;
-    String titulo;
-    String status;
-    String prioridade;
-    Time entregaTime;
 
     @Autowired
-    TarefaRepository tarefaRepository;
+    private final TarefaRepository tarefaRepository;
     
-    @GetMapping
-    public List<Tarefa> allTarefa() {
-       return tarefaRepository.findAll();
+    
+    public TaskManagerController(TarefaRepository tarefaRepository) {
+        this.tarefaRepository = tarefaRepository;
     }
-    
+
     @GetMapping("/tarefas")
     public List<Tarefa> getTarefas() {
         return tarefaRepository.findAll();
     }
 
     @PostMapping("/save")
+    @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Tarefa> saveTarefa(@RequestBody Tarefa tarefa) {
         tarefa.setData();
         return new ResponseEntity<Tarefa>(tarefaRepository.save(tarefa), HttpStatus.CREATED);
     }
+    
 
-    @GetMapping("/pendentes")
-    public List<Tarefa> tarefasPendentes() {
-        //Tarefa tarefa;
-        return null;
+    @GetMapping("/status")
+    public List<Tarefa> tarefasPendentes(@RequestParam(value = "status", required = false) String status) {
+        if (status == null){
+            return this.tarefaRepository.findAll();
+        }
+        return this.tarefaRepository.findByStatus(status);
     }
 
-    @GetMapping("/concluídas")
-    public List<Tarefa> tarefasConcluídas() {
-        //Tarefa tarefa;
-        return null;
-    }
+
 
     @DeleteMapping("/dell")
     public String deleteTarefa(){
