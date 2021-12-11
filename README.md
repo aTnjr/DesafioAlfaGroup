@@ -46,6 +46,9 @@ GET   localhost:8080/api/tarefas/prioridade        -----> Retorna uma lista com 
 
 GET   localhost:8080/api/tarefas/prioridadeEntrega -----> Retorna uma lista com o menor intervalo de tempo desde o salvamento da tarefa até a data de entrega.
 
+GET   localhost:8080/api/tarefas/pendentesPrioridade -----> Retorna a lista de pendentes com a duração limitada a hora.
+
+GET   localhost:8080/api/tarefas/data              -----> Retorna a data das tarefas conforme a data passada como parametro.
 
 
 
