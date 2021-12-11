@@ -14,9 +14,12 @@ public interface TarefaRepository extends JpaRepository<Tarefa, Long> {
 
     List<Tarefa> findByStatus(String status);
 
-    @Query(value = "SELECT * FROM tb_tarefa ORDER BY (entrega_date - data)", nativeQuery = true)
-    List<Tarefa> findAllByPrioridade();
+    List<Tarefa> findByPrioridade(String prioridade);
 
+    @Query(value = "SELECT * FROM tb_tarefa ORDER BY (entrega_date - data)", nativeQuery = true)
+    List<Tarefa> findAllByPrioridadeEntrega();
+    
+    @Query(value = "SELECT * FROM tb_tarefa ORDER BY (entrega_date - data)", nativeQuery = true)
     List<Tarefa> findByEntregaDate(LocalDate entregaDate);
 
 }
