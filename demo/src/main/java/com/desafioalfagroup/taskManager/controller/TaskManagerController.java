@@ -1,14 +1,15 @@
 package com.desafioalfagroup.taskManager.controller;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import com.desafioalfagroup.taskManager.model.Tarefa;
 import com.desafioalfagroup.taskManager.repository.TarefaRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@RequestMapping(value = "/api")
+@RequestMapping(value = "/api/tarefas")
 public class TaskManagerController {
 
 
@@ -52,12 +53,21 @@ public class TaskManagerController {
         return this.tarefaRepository.findByStatus(status);
     }
 
-
-
-    @DeleteMapping("/dell")
-    public String deleteTarefa(){
-        return "Deleta";
+    @GetMapping("/ordem")
+    public List<Tarefa> tarefasEntregaOrdem() {
+        return tarefaRepository.findAll(Sort.by("entregaDate"));
+    }
+    
+    @GetMapping("/prioridade")
+    public List<Tarefa> tarefasPrioridade(){
+        return tarefaRepository.findAllByPrioridade();
+    }
+    
+    @GetMapping("/dia")
+    public List<Tarefa> tarefasPendentesDia(LocalDate data) {
+        return tarefaRepository.findByEntregaDate(data);
     }
     
     
+
 }
