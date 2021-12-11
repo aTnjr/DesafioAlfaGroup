@@ -1,6 +1,6 @@
 # DesafioAlfaGroup
 
-Antes de tudo, após o download dos arquivos, é necessário tirar a pasta security da pasta principal da aplicação (DesafioAlfaGroup\demo\src\main\java\com\desafioalfagroup\taskManager). Pois ainda não temos um usuário cadastrado e se rodarmos a API com a pasta security não teremos autorização para salvar um usuário.
+Antes de tudo, após o download dos arquivos, é necessário tirar a pasta security da pasta principal da aplicação (DesafioAlfaGroup\demo\src\main\java\com\desafioalfagroup\taskManager). Pois ainda não temos um usuário cadastrado e se rodarmos a API com a pasta security não teremos autorização para salvar um usuário. Também é necessário configurar o arquivo aplication.properties e colocar as credencias do seu postegresql
 
 após mover a pasta será possível iniciar a aplicação, e salvar um usuário utilizando o método POST no caminho http://localhost:8080/api/usuario/salvar
 passando no body:
