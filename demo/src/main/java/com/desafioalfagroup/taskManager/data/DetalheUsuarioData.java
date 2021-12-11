@@ -1,19 +1,17 @@
 package com.desafioalfagroup.taskManager.data;
+import com.desafioalfagroup.taskManager.model.UsuarioModel;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Optional;
 
-import com.desafioalfagroup.taskManager.model.UsuarioModel;
-
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
-public class DetalheUsuData implements UserDetails {
+public class DetalheUsuarioData implements UserDetails {
 
     private final Optional<UsuarioModel> usuario;
 
-    public DetalheUsuData(Optional<UsuarioModel> usuario){
+    public DetalheUsuarioData(Optional<UsuarioModel> usuario) {
         this.usuario = usuario;
     }
 
@@ -51,5 +49,4 @@ public class DetalheUsuData implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
-    
 }

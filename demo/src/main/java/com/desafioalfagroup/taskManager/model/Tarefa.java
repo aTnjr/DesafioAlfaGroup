@@ -4,7 +4,6 @@ import static javax.persistence.GenerationType.AUTO;
 
 import java.io.Serializable;
 import java.sql.Time;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -23,26 +22,25 @@ public class Tarefa implements Serializable {
     private Long id;
 
     private String titulo;
+    private Time duracao;
 
     @Column(name = "entrega_date")
-    private LocalDate entregaDate;
+    private LocalDateTime entregaDate;
 
-    @Column(name = "entrega_time")
-    private Time entregaTime;
     private String status;
     private LocalDateTime data;
 
     public Tarefa(){
     }
+    
+    public Time getDuracao() {
+        return duracao;
+    }
 
-    public Time getEntregaTime() {
-        return entregaTime;
+    public void setDuracao(Time duracao) {
+        this.duracao = duracao;
     }
-    
-    public void setEntregaTime(Time entregaTime) {
-        this.entregaTime = entregaTime;
-    }
-    
+
     public LocalDateTime getData() {
         return data;
     }
@@ -51,11 +49,11 @@ public class Tarefa implements Serializable {
         this.data = LocalDateTime.now();
     }
 
-    public LocalDate getEntregaDate() {
+    public LocalDateTime getEntregaDate() {
         return entregaDate;
     }
     
-    public void setEntregaDate(LocalDate entregaDate) {
+    public void setEntregaDate(LocalDateTime entregaDate) {
         this.entregaDate = entregaDate;
     }
     

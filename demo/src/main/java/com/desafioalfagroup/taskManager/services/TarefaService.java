@@ -5,6 +5,8 @@ import com.desafioalfagroup.taskManager.repository.TarefaRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+
+
 public class TarefaService {
     
     @Autowired
@@ -12,6 +14,7 @@ public class TarefaService {
 
     public Tarefa saveTarefa(Tarefa tarefa){
         return tarefaRepository.saveAndFlush(tarefa);
-    } 
+    }
+    
 
 }

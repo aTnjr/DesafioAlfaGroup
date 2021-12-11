@@ -1,7 +1,7 @@
 package com.desafioalfagroup.taskManager.security;
 
 
-import com.desafioalfagroup.taskManager.services.DetalheUsuarioService;
+import com.desafioalfagroup.taskManager.services.DetalheUsuarioServiceImpl;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
@@ -18,10 +18,10 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 @EnableWebSecurity
 public class JWTConfiguracao extends WebSecurityConfigurerAdapter {
 
-    private final DetalheUsuarioService usuarioService;
+    private final DetalheUsuarioServiceImpl usuarioService;
     private final PasswordEncoder passwordEncoder;
 
-    public JWTConfiguracao(DetalheUsuarioService usuarioService, PasswordEncoder passwordEncoder) {
+    public JWTConfiguracao(DetalheUsuarioServiceImpl usuarioService, PasswordEncoder passwordEncoder) {
         this.usuarioService = usuarioService;
         this.passwordEncoder = passwordEncoder;
     }
@@ -33,24 +33,22 @@ public class JWTConfiguracao extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable().authorizeRequests().antMatchers(HttpMethod.POST, "/login")
-        .permitAll()
-        .anyRequest()
-        .authenticated()
-        .and()
-        .addFilter(new JWTAutenticarFilter(authenticationManager()))
-        .addFilter(new JWTValidarFilter(authenticationManager()))
-        .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        http.csrf().disable().authorizeRequests()
+                .antMatchers(HttpMethod.POST, "/login").permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .addFilter(new JWTAutenticarFilter(authenticationManager()))
+                .addFilter(new JWTValidarFilter(authenticationManager()))
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
 
     @Bean
-    CorsConfigurationSource corsConfigurationSource(){
+    CorsConfigurationSource corsConfigurationSource() {
         final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 
         CorsConfiguration corsConfiguration = new CorsConfiguration().applyPermitDefaultValues();
         source.registerCorsConfiguration("/**", corsConfiguration);
         return source;
-
-
     }
+
 }

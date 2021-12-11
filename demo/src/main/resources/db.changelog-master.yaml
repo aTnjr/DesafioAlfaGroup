@@ -1,0 +1,17 @@
+project.name: taskManager
+
+spring:
+  application:
+    name: ${project.name}
+
+  datasource:
+    url: jdbc:postgresql://localhost/liquibase-db
+    username: postgres
+    password: postgres
+
+jpa:
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
