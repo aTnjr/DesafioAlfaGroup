@@ -18,5 +18,5 @@ public class TaskManagerAplication {
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		return encoder;
 	}
-
+	
 }

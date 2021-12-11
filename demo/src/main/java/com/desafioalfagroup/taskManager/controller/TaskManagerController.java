@@ -1,6 +1,9 @@
 package com.desafioalfagroup.taskManager.controller;
 
-import java.time.LocalDate;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 
 import com.desafioalfagroup.taskManager.model.Tarefa;
@@ -32,7 +35,7 @@ public class TaskManagerController {
         this.tarefaRepository = tarefaRepository;
     }
 
-    @GetMapping("/tarefas")
+    @GetMapping
     public List<Tarefa> getTarefas() {
         return tarefaRepository.findAll();
     }
@@ -53,21 +56,32 @@ public class TaskManagerController {
         return this.tarefaRepository.findByStatus(status);
     }
 
+    @GetMapping("/prioridade")
+    public List<Tarefa> tarefasPrioridade(@RequestParam(value = "prioridade", required = false) String prioridade) {
+        if (prioridade == null){
+            return this.tarefaRepository.findAll();
+        }
+        return this.tarefaRepository.findByPrioridade(prioridade);
+    }
+
     @GetMapping("/ordem")
     public List<Tarefa> tarefasEntregaOrdem() {
         return tarefaRepository.findAll(Sort.by("entregaDate"));
     }
     
-    @GetMapping("/prioridade")
-    public List<Tarefa> tarefasPrioridade(){
-        return tarefaRepository.findAllByPrioridade();
+    @GetMapping("/prioridadeEntrega")
+    public List<Tarefa> tarefasPrioridadeEntrega(){
+        return tarefaRepository.findAllByPrioridadeEntrega();
     }
     
-    @GetMapping("/dia")
-    public List<Tarefa> tarefasPendentesDia(LocalDate data) {
-        return tarefaRepository.findByEntregaDate(data);
+    @GetMapping("/pendentesPrioridade")
+    public List<Tarefa> tarefasPendentesPrioridade() {
+        return tarefaRepository.findByEntregaDate();
     }
-    
-    
 
+    @GetMapping("/data")
+    public List<Tarefa> tarefasPorData(String data){
+        LocalDateTime dateTime = LocalDateTime.parse(data);
+        return tarefaRepository.findByData(dateTime);
+    }
 }

@@ -23,6 +23,7 @@ public class Tarefa implements Serializable {
 
     private String titulo;
     private Time duracao;
+    private String prioridade;
 
     @Column(name = "entrega_date")
     private LocalDateTime entregaDate;
@@ -33,6 +34,14 @@ public class Tarefa implements Serializable {
     public Tarefa(){
     }
     
+    public String getPrioridade() {
+        return prioridade;
+    }
+
+    public void setPrioridade(String prioridade) {
+        this.prioridade = prioridade;
+    }
+
     public Time getDuracao() {
         return duracao;
     }

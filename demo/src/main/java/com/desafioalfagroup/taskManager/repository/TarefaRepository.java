@@ -1,6 +1,7 @@
 package com.desafioalfagroup.taskManager.repository;
 
-import java.time.LocalDate;
+import java.sql.Time;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import com.desafioalfagroup.taskManager.model.Tarefa;
@@ -18,8 +19,10 @@ public interface TarefaRepository extends JpaRepository<Tarefa, Long> {
 
     @Query(value = "SELECT * FROM tb_tarefa ORDER BY (entrega_date - data)", nativeQuery = true)
     List<Tarefa> findAllByPrioridadeEntrega();
-    
-    @Query(value = "SELECT * FROM tb_tarefa ORDER BY (entrega_date - data)", nativeQuery = true)
-    List<Tarefa> findByEntregaDate(LocalDate entregaDate);
+
+    @Query(value ="SELECT * FROM tb_tarefa WHERE status = 'Pendente' AND duracao <= '02:00:00'", nativeQuery = true)
+    List<Tarefa> findByEntregaDate();
+
+    List<Tarefa> findByData(LocalDateTime data);
 
 }

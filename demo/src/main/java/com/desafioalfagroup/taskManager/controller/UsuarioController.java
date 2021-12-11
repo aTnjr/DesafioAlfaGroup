@@ -19,7 +19,7 @@ public class UsuarioController {
     private final PasswordEncoder encoder;
 
     public UsuarioController(UsuarioRepository repository, PasswordEncoder encoder) {
-        this.repository = repository;
+        this.repository = repository; 
         this.encoder = encoder;
     }
 
